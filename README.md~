@@ -1,8 +1,9 @@
 # Learn-ROS
 Indigo中的ROS学习
-src下两个功能包：均是用c++学习的。</br>
+src下3个功能包：均是用c++学习的。</br>
 learning_topic包含了对Publisher、Subscriber的学习以及对Person.msg的自定义消息。</br>
 learning_service包含了对Client、Server的实现。</br>
+learning_parameter包含了对参数的使用及编程方法。</br>
 
 ## learning_topic
 pos_subscriber和velocity_publisher主要与海龟仿真器节点(turtlesim)一起运行。</br>
@@ -20,3 +21,7 @@ turtle_command_server：定义了一个海龟运动开关的服务/turtle_comman
 在学习topic与message时会遇到这样的问题：如果不希望消息一直发布，而是需要的时候发布一次，这时候就需要service。定义了新的srv:Person.srv，里面包含了与Person.msg中类似的信息，不同之处在于srv有反馈。</br>
 person_client:本节点是用户端，等待服务器/show_person响应，向服务器发送learning_servie::Person类型的服务请求，希望打印Person信息，成功后打印response信息。</br>
 person_server:作为/show_person的服务器端，在有用户提出服务请求时进入回调函数，打印出Person信息，并反馈结果（response）给用户端。
+
+## learning_parameter
+简单学习了全局参数的设置、获取，以及在命令行中设置获取参数以及参数文件的保存和加载。</br>
+parameter_config.cpp：与海龟仿真器一起使用，主要实现了对背景颜色的获取和修改，修改完毕后通过Client调用服务/clear实现背景参数写入海龟仿真器。

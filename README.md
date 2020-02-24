@@ -42,3 +42,36 @@ $ rosrun learning_tf turtle_tf_listener</br>
 $ rosrun turtlesim turtle_teleop_key</br>
 即可实现海龟跟踪。
 
+## learning_launch
+launch文件是ROS通过XML标签实现的，本功能包中学习了launch文件的编写，免去过多终端的繁杂，适合在每个节点调试完毕之后同时启动。</br>
+常用的标签有<launch>、<node>、<param>、<rosparam>、<remap>、<include>等。</br>
+具体通过四个launch文件学习：simple.launch、turtlesim_parameter_config.launch、start_tf_demo.launch、turtle_remap.launch。</br>
+simple.launch：启动了两个节点，分别是learning_topic中的person_subscriber和person_publisher。</br>
+turtlesim_parameter_config.launch：学习了参数保存到参数服务器中、通过文件导入参数。</br>
+start_tf_demo.launch：将learning_tf中五条指令通过launch文件实现，效果一样。</br>
+turtle_remap.launch：学习重映射话题名（重映射计算图资源的命名）。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

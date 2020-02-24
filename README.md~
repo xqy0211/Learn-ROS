@@ -25,3 +25,20 @@ person_server:作为/show_person的服务器端，在有用户提出服务请求
 ## learning_parameter
 简单学习了全局参数的设置、获取，以及在命令行中设置获取参数以及参数文件的保存和加载。</br>
 parameter_config.cpp：与海龟仿真器一起使用，主要实现了对背景颜色的获取和修改，修改完毕后通过Client调用服务/clear实现背景参数写入海龟仿真器。
+
+## learning_tf
+学习了ROS中坐标系管理系统tf：可以记录机器人10秒钟之内所有坐标系之间的位置关系，通过广播和监听tf实现。</br>
+在查看tf时大致有三种方法：rosrun tf view_frames生成坐标系位置关系pdf、rosrun tf tf_echo [tf1] [tf2]打印出坐标系间关系、rviz工具直观显示。</br>
+注意理解的一点是坐标系之间的关系实质上是一个向量（还是2阶矩阵？下学期应该会学到）。</br>
+功能包中主要节点有：turtle_tf_listener、turtle_tf_broadcaster，都是与turtlesim海龟仿真器一起使用的。</br>
+turtle_tf_broadcaster：用于广播tf。广播相关程序主要在pose的回调函数中，当仿真器turtle1生成（就是仿真器启动时），一个subscriber订阅turtle1的位置信息（Pose），进入回调函数，回调函数中创建了tf广播器，turtle与world之间的tf关系可以由Pose处理后封装，封装的格式为tf::Transform。需要体会一下用一个程序启动两个节点的“重映射”。</br>
+turtle_tf_listener：用于接收tf，发布turtle2的速度信息。启动程序时调用/spawn服务生成新的海龟，监听/turtle1和/turtle2的tf，保存于tf::StampedTransform类型的transform（一个连接两个坐标系的向量）中。通过向量的长度得到坐标系间距离，除以时间获得turtle2的cmd_vel的linear.x；通过向量的x、y方向长度反正切确定坐标系间夹角，通过除以时间获得turtle2的cmd_vel的angular.z，进而封装好vel_msg，发布给turtle2。</br>
+命令行依次输入：</br>
+$ roscore</br>
+$ rosrun turtlesim turtlesim_node</br>
+$ rosrun learning_tf turtle_tf_broadcaster __name:=turtle1_tf_broadcaster /turtle1</br>
+$ rosrun learning_tf turtle_tf_broadcaster __name:=turtle2_tf_broadcaster /turtle2</br>
+$ rosrun learning_tf turtle_tf_listener</br>
+$ rosrun turtlesim turtle_teleop_key</br>
+即可实现海龟跟踪。
+

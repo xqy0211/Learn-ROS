@@ -44,7 +44,7 @@ $ rosrun turtlesim turtle_teleop_key</br>
 
 ## learning_launch
 launch文件是ROS通过XML标签实现的，本功能包中学习了launch文件的编写，免去过多终端的繁杂，适合在每个节点调试完毕之后同时启动。</br>
-常用的标签有<launch>、<node>、<param>、<rosparam>、<remap>、<include>等。</br>
+常用的标签有launch、node、param、rosparam、remap、include等。</br>
 具体通过四个launch文件学习：simple.launch、turtlesim_parameter_config.launch、start_tf_demo.launch、turtle_remap.launch。</br>
 simple.launch：启动了两个节点，分别是learning_topic中的person_subscriber和person_publisher。</br>
 turtlesim_parameter_config.launch：学习了参数保存到参数服务器中、通过文件导入参数。</br>

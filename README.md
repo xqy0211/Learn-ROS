@@ -1,9 +1,14 @@
 # Learn-ROS
 Indigo中的ROS学习
-src下3个功能包：均是用c++学习的。</br>
+src下6个功能包：均是用c++学习的。</br>
 learning_topic包含了对Publisher、Subscriber的学习以及对Person.msg的自定义消息。</br>
 learning_service包含了对Client、Server的实现。</br>
 learning_parameter包含了对参数的使用及编程方法。</br>
+learning_tf包含了对ROS中的坐标管理方法，对于多智能体控制理论上有帮助。</br>
+learning_launch包含了对于lanunch文件的读写方法，有助于多节点启动的场景。</br>
+ROS-Behavior-Tree包含了行为树的使用，目的在于多体控制时定义行为顺序。
+
+
 
 ## learning_topic
 pos_subscriber和velocity_publisher主要与海龟仿真器节点(turtlesim)一起运行。</br>
@@ -51,7 +56,24 @@ turtlesim_parameter_config.launch：学习了参数保存到参数服务器中�
 start_tf_demo.launch：将learning_tf中五条指令通过launch文件实现，效果一样。</br>
 turtle_remap.launch：学习重映射话题名（重映射计算图资源的命名）。
 
-
+## ROS-Behavior-Tree
+从公众号：古月居中找到的有用的功能包。</br>
+实现功能：敌方白色的小乌龟在地图中沿某条固定线路巡逻，我方用键盘控制红色小乌龟运动。当敌我距离太近时，敌方小乌龟会察觉我方存在，并展开追逐。此时我们需要移动红色小乌龟，甩开敌方一定距离后，敌方才会重新回到巡逻路线上。</br>
+链接：https://mp.weixin.qq.com/s?__biz=MzU1NjEwMTY0Mw==&mid=2247486381&idx=1&sn=1609582a0d35774abd54f74a3fb048a1&chksm=fbcb72c9ccbcfbdf62546f30bb7adeddf4d629dd3c374b77f4e857a3d42cfbd851efa9e0da18&mpshare=1&scene=23&srcid=&sharer_sharetime=1589078266917&sharer_shareid=206f850bf7fea469ec89cb52c8bff691#rd
+实际上是在tf跟随的基础上增加了单体的决策（通过行为树实现），其中比较重要的文件：</br>
+ROS-Behavior-Tree/behavior_tree_core/src/tree/：</br>
+ guard_robot_tree.cpp定义了行为树的结构</br>
+ROS-Behavior-Tree/behavior_tree_leaves/nodes/：</br>
+ action_nav_enemy.cpp动作节点——向敌人移动</br>
+ action_patrol.cpp动作节点——巡逻</br>
+ condition_have_enemy条件节点——判断敌人</br>
+ROS-Behavior-Tree/behavior_tree_leaves/src：</br>
+ turtle_tf_broadcaster.cpp广播第一只小乌龟的tf</br>
+ turtle_tf_broadcaster_2.cpp广播第二只小乌龟和巡逻点坐标的tf</br>
+打开终端编译并运行：</br>
+$ cd ~/catkin_ws</br>
+$ catkin_make</br>
+$ roslaunch behavior_tree_leaves guard_robot_behavior_tree.launch</br>
 
 
 

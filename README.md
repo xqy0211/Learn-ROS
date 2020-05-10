@@ -57,10 +57,11 @@ start_tf_demo.launch：将learning_tf中五条指令通过launch文件实现，�
 turtle_remap.launch：学习重映射话题名（重映射计算图资源的命名）。
 
 ## ROS-Behavior-Tree
+！！！要注意，因为也用到了learning_tf中部分重名的，故使用此包时要把learning_tf包删除！！！ </br>
 从公众号：古月居中找到的有用的功能包。</br>
 实现功能：敌方白色的小乌龟在地图中沿某条固定线路巡逻，我方用键盘控制红色小乌龟运动。当敌我距离太近时，敌方小乌龟会察觉我方存在，并展开追逐。此时我们需要移动红色小乌龟，甩开敌方一定距离后，敌方才会重新回到巡逻路线上。</br>
 链接：https://mp.weixin.qq.com/s?__biz=MzU1NjEwMTY0Mw==&mid=2247486381&idx=1&sn=1609582a0d35774abd54f74a3fb048a1&chksm=fbcb72c9ccbcfbdf62546f30bb7adeddf4d629dd3c374b77f4e857a3d42cfbd851efa9e0da18&mpshare=1&scene=23&srcid=&sharer_sharetime=1589078266917&sharer_shareid=206f850bf7fea469ec89cb52c8bff691#rd
-实际上是在tf跟随的基础上增加了单体的决策（通过行为树实现），其中比较重要的文件：</br>
+</br>实际上是在tf跟随的基础上增加了单体的决策（通过行为树实现），其中比较重要的文件：</br>
 ROS-Behavior-Tree/behavior_tree_core/src/tree/：</br>
  guard_robot_tree.cpp定义了行为树的结构</br>
 ROS-Behavior-Tree/behavior_tree_leaves/nodes/：</br>

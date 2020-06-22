@@ -76,6 +76,20 @@ $ cd ~/catkin_ws</br>
 $ catkin_make</br>
 $ roslaunch behavior_tree_leaves guard_robot_behavior_tree.launch</br>
 
+## learning_action
+ActionClient 和ActionServer之间使用action protocol通信，action protocol就是预定义的一组ROS message，包括goal、cancel、status、result、feedback
+1.新建action/DoDishes.action文件，action文件由三部分组成，部分之间用---隔开，第一部分goal相当于service中的request，第二部分result相当于server回传给client的结果，第三部分feedback为实时反馈结果。</br>
+区别在于result只可能传一次，feedback实时，有可能多次。</br>
+实现了.action之后，还需要将这个文件加入编译，在CMakeLists.txt文件中添加如下的编译规则：</br>
+find_package(catkin REQUIRED genmsg actionlib_msgs actionlib)</br>
+add_action_files(DIRECTORY action FILES DoDishes.action) generate_messages(DEPENDENCIES actionlib_msgs)</br>
+在package.xml中添加：</br>
+<build_depend>actionlib</build_depend>
+<build_depend>actionlib_msgs</build_depend>
+<run_depend>actionlib</run_depend> 
+<run_depend>actionlib_msgs</run_depend>
+catkin_make后在catkin_ws/devel/share/learning_action/msg文件夹下出现7个文件，用于ActionClient 和 ActionServer间的通信，在devel/include/actionlib_test/中也生成了相关的头文件</br>
+学习时犯的错误：action文件夹应该放到learning_action下而不是learning_action/src下 否则会出现：add_message_files() directory not found</br>
 
 
 

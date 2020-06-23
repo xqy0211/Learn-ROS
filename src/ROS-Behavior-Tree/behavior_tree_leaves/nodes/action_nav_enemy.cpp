@@ -27,9 +27,9 @@ enum Status {RUNNING, SUCCESS, FAILURE};  // BT return status
 class BTAction
 {
 protected:
-    ros::NodeHandle nh_;
+    ros::NodeHandle nh_;    //ros句柄
     // NodeHandle instance must be created before this line. Otherwise strange error may occur.
-    actionlib::SimpleActionServer<behavior_tree_core::BTAction> as_;
+    actionlib::SimpleActionServer<behavior_tree_core::BTAction> as_;        //新建服务端，传递的消息格式为behavior_tree_core::BTAction
     std::string action_name_;
     // create messages that are used to published feedback/result
     behavior_tree_core::BTFeedback feedback_;  // action feedback (SUCCESS, FAILURE)

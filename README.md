@@ -96,7 +96,7 @@ DoDishes_client.cpp：main函数中通过actionlib::SimpleActionClient<learning_
 创建action的goal，之后发送goal给服务端，设置回调函数，分别对应完成goal，goal发送成功，实时反馈。  
 DoDishes_server.cpp：main函数中通过actionlib::SimpleActionServer<learning_action::DoDishesAction> server(n, "do_dishes", boost::bind(&execute, _1, &server), false) 定义一个服务端。  
 server.start()服务端开始运行。  
-boost::bind函数：
+boost::bind函数：func(a1,a2);等价于bind(func,a1,a2)();
 
 
 

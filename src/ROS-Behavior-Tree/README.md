@@ -141,30 +141,10 @@ which the tree is published. The default topic is `/bt_dotcode`.
 ```
 rosrun rqt_dot rqt_dot
 ```
-NOTES
+以下对代码学习和分析
 -------
-In case you are puzzled about why a sequence (or fallback) node with 2 or more actions as children never get past the first action, see [this](https://github.com/miccol/ROS-Behavior-Tree/issues/16) discussion.
-
-LICENSE
--------
-The MIT License (MIT)
-
-Copyright (c) 2014-2018 Michele Colledanchise
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+与直接clone下的behavior-tree的文件差别（需要自己修改或者添加的部分）：  
+1.behavior_tree_core文件夹中的src下增加文件夹tree，tree中新增文件guard_robot_tree.cpp  
+2.behavior_tree_leaves文件夹中的launch下增加1个文件：guard_robot_behavior_tree.cpp  
+3.behavior_tree_leaves文件夹中的nodes下增加3个文件：action_nav_enemy.cpp、action_patrol.cpp、condition_have_enemy.cpp
+4.behavior_tree_leaves文件夹中的src下增加两个文件：turtle_tf_broadcaster.cpp和turtle_tf_broadcaster_2.cpp

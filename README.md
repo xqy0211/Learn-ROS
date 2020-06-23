@@ -82,14 +82,21 @@ ActionClient 和ActionServer之间使用action protocol通信，action protocol�
 区别在于result只可能传一次，feedback实时，有可能多次。</br>
 实现了.action之后，还需要将这个文件加入编译，在CMakeLists.txt文件中添加如下的编译规则：</br>
 find_package(catkin REQUIRED genmsg actionlib_msgs actionlib)</br>
-add_action_files(DIRECTORY action FILES DoDishes.action) generate_messages(DEPENDENCIES actionlib_msgs)</br>
+add_action_files(DIRECTORY action FILES DoDishes.action)</br> generate_messages(DEPENDENCIES actionlib_msgs)</br>
 在package.xml中添加：</br>
-<build_depend>actionlib</build_depend>
-<build_depend>actionlib_msgs</build_depend>
-<run_depend>actionlib</run_depend> 
-<run_depend>actionlib_msgs</run_depend>
+<build_depend>actionlib</build_depend>  </br>
+<build_depend>actionlib_msgs</build_depend></br>
+<run_depend>actionlib</run_depend> </br>
+<run_depend>actionlib_msgs</run_depend></br>
 catkin_make后在catkin_ws/devel/share/learning_action/msg文件夹下出现7个文件，用于ActionClient 和 ActionServer间的通信，在devel/include/actionlib_test/中也生成了相关的头文件</br>
 学习时犯的错误：action文件夹应该放到learning_action下而不是learning_action/src下 否则会出现：add_message_files() directory not found</br>
+2.新建Client和Server  
+DoDishes_client.cpp：main函数中通过actionlib::SimpleActionClient<learning_action::DoDishesAction> client("do_dishes", true)定义客户端，通过typedef的方式能够简洁代码。  
+之后client调用ROS中函数client.waitForServer()等待服务器响应。  
+创建action的goal，之后发送goal给服务端，设置回调函数，分别对应完成goal，goal发送成功，实时反馈。  
+DoDishes_server.cpp：main函数中通过actionlib::SimpleActionServer<learning_action::DoDishesAction> server(n, "do_dishes", boost::bind(&execute, _1, &server), false) 定义一个服务端。  
+server.start()服务端开始运行。  
+boost::bind函数：
 
 
 

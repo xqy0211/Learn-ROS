@@ -15,4 +15,17 @@ new BT::FallbackNode新建选择节点，
 new BT::SequenceNode新建序列节点。  
 新建好这些节点以后通过->AddChild的方式设计节点间的关系。  
 设计好之后 Execute(guard, TickPeriod_milliseconds)生成树。</br>
+**guard_robot_tree.cpp**：主要看try中代码，
+new BT::ROSCondition新建条件节点，
+new BT::ROSAction新建动作节点，
+new BT::FallbackNode新建选择节点，
+new BT::SequenceNode新建序列节点。  
+新建好这些节点以后通过->AddChild的方式设计节点间的关系。
+设计好之后 Execute(guard, TickPeriod_milliseconds)生成树。
+**guard_robot_behavior_tree.launch**：
+两个关于海龟仿真器的节点启动：turtlesim包下的turtlesim_node和turtle_teleop_key；  
+两个启动tf，与learning_tf中几乎一样；  
+三个启动行为树节点，一个启动行为树。  
+**turtle_tf_broadcaster.cpp**：与learning_tf中几乎一样  
+**turtle_tf_broadcaster_2.cpp**：与learning_tf中几乎一样  
 
